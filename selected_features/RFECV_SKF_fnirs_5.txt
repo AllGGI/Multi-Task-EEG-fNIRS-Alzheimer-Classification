@@ -1,0 +1,19 @@
+SKF
+>> Optimal number of features : 16 
+>> Selected features:
+Unnamed: 0
+hb-fnirs-ch-0-Heartbeat-kurt
+hb-fnirs-ch-1-LFO-kurt
+hb-fnirs-ch-1-Respiration-skew
+hb-fnirs-ch-2-Respiration-skew
+hb-fnirs-ch-3-VLFO-kurt
+hb-fnirs-ch-3-Heartbeat-mu
+hb-fnirs-ch-4-VLFO-skew
+hbo-fnirs-ch-0-Heartbeat-kurt
+hbo-fnirs-ch-1-LFO-kurt
+hbo-fnirs-ch-1-Respiration-skew
+hbo-fnirs-ch-1-Heartbeat-mu
+hbo-fnirs-ch-3-VLFO-kurt
+hbo-fnirs-ch-3-Heartbeat-mu
+hbo-fnirs-ch-4-VLFO-skew
+hbo-fnirs-ch-4-Heartbeat-skew

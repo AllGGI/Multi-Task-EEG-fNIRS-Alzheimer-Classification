@@ -1,3 +1,10 @@
+# big files
+Experiments/
+pickles/
+power_npy/
+
+
+##################################################################
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

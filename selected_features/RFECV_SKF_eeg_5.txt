@@ -1,0 +1,13 @@
+SKF
+>> Optimal number of features : 10 
+>> Selected features:
+Unnamed: 0
+eeg-ch-12-Delta-mu
+eeg-ch-13-Theta-skew
+eeg-ch-27-Delta-mu
+eeg-ch-27-Delta-std
+eeg-ch-27-Theta-mu
+eeg-ch-30-Theta-skew
+eeg-ch-30-Alpha-skew
+eeg-ch-30-Beta-skew
+eeg-ch-31-Beta-kurt
