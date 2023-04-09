@@ -2,7 +2,8 @@
 Experiments/
 pickles/
 power_npy/
-
+temp*.py
+rfecv*/
 
 ##################################################################
 # Byte-compiled / optimized / DLL files

@@ -39,7 +39,7 @@ def sliced2csv(load_pth, save_csv_name):
     # EEG
     EEG_all_levels = []
     for level in levels:
-        eeg_file = np.load(load_pth + level + '_eeg_power.npy')
+        eeg_file = np.load(load_pth + level + '_eeg_power_SMSD.npy')
         # print(eeg_file.shape) # (patients, 6 act, 3 - Px,Pm,Pd, 6 band, 32 ch)
         level_flatten_data = []
         for patient in range(eeg_file.shape[0]):
@@ -61,7 +61,7 @@ def sliced2csv(load_pth, save_csv_name):
     # FNIRS
     FNIRS_all_levels = []
     for level in levels:
-        fnirs_file = np.load(load_pth + level + '_fnirs_power.npy')
+        fnirs_file = np.load(load_pth + level + '_fnirs_power_SMSD.npy')
         # print(fnirs_file.shape) # (patients, 6act, 3hb, 3px, 4band, 6ch)
         
         level_flatten_data = []
@@ -98,9 +98,9 @@ def sliced2csv(load_pth, save_csv_name):
     zero_cols = []
     for col in all_cols:
         if sum(df[col]) == 0: zero_cols.append(col)
-    
+    print(zero_cols)
     df = df.drop(columns=zero_cols)
-    print(df) # 4752 -> 1585
+    print(df) # 4752
 
     if not os.path.exists('./csv'):
         os.makedirs('./csv')

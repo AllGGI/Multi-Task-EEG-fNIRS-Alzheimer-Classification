@@ -23,7 +23,7 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
         Pm: mean power in a band       -  shape (number of bands,nch)
         Pd: standard deviation of power in a band  -  shape (number of bands,nch)
     '''
-    '''
+    
     ###################################################################################
     eeg_sampling_rate = 500
     slice_sec = 5
@@ -38,7 +38,7 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
                 if act_num == 0: # RO
                     data = act_data[:eeg_sampling_rate*60, :] # RO - 60 sec
                     # print(data.shape) # (30000, 32)
-                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fs=eeg_sampling_rate)
+                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fs=eeg_sampling_rate, Sum=True, Mean=True, SD =True)
                     # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
                     powers = np.stack([Px,Pm,Pd], axis=0)
                     # print(powers.shape)
@@ -50,7 +50,7 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
                     act_out_1_sample_Px, act_out_1_sample_Pm, act_out_1_sample_Pd = [], [], []
                     for data_sample in data_list: # 5 sec (2500, 32)
                         # print(data_sample.shape) # (2500, 32)
-                        Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data_sample, fs=eeg_sampling_rate)
+                        Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data_sample, fs=eeg_sampling_rate, Sum=True, Mean=True, SD =True)
                         # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
 
                         powers = np.stack([Px,Pm,Pd], axis=0)
@@ -71,10 +71,10 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
         patients = np.asarray(patients)
         # print(patients.shape) # (26, 6, 3, 6, 32)
 
-        np.save('./power_npy/sliced/' + levels[i] + '_eeg_power.npy', patients)
+        np.save('./power_npy/sliced/' + levels[i] + '_eeg_power_SMSD.npy', patients)
         print('>> npy saved.')
     ###################################################################################
-    '''
+    
     ###################################################################################
     fnirs_sampling_rate = 8
     slice_sec = 5
@@ -92,13 +92,13 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
                     hbo_data = act_data['HbO'][:fnirs_sampling_rate*60, :] # RO - 60 sec (480, 6)
                     thb_data = act_data['THb'][:fnirs_sampling_rate*60, :] # RO - 60 sec (480, 6)
 
-                    hb_Px,hb_Pm,hb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hb_data, fs=fnirs_sampling_rate, fBands=fnirs_band)
+                    hb_Px,hb_Pm,hb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hb_data, fs=fnirs_sampling_rate, fBands=fnirs_band, Sum=True, Mean=True, SD =True)
                     hb_powers = np.stack([hb_Px,hb_Pm,hb_Pd], axis=0)
 
-                    hbo_Px,hbo_Pm,hbo_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hbo_data, fs=fnirs_sampling_rate, fBands=fnirs_band)
+                    hbo_Px,hbo_Pm,hbo_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hbo_data, fs=fnirs_sampling_rate, fBands=fnirs_band, Sum=True, Mean=True, SD =True)
                     hbo_powers = np.stack([hbo_Px,hbo_Pm,hbo_Pd], axis=0)
 
-                    thb_Px,thb_Pm,thb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=thb_data, fs=fnirs_sampling_rate, fBands=fnirs_band)
+                    thb_Px,thb_Pm,thb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=thb_data, fs=fnirs_sampling_rate, fBands=fnirs_band, Sum=True, Mean=True, SD =True)
                     thb_powers = np.stack([thb_Px,thb_Pm,thb_Pd], axis=0)
 
                     # print(hb_powers.shape) # (3,4,6)
@@ -114,9 +114,9 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
 
                     for hb_data_sample, hbo_data_sample, thb_data_sample in zip(hb_act_data, hbo_act_data, thb_act_data): # dict
                         
-                        hb_Px,hb_Pm,hb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hb_data_sample, fs=fnirs_sampling_rate, fBands=fnirs_band, nperseg = 40)
-                        hbo_Px,hbo_Pm,hbo_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hbo_data_sample, fs=fnirs_sampling_rate, fBands=fnirs_band, nperseg = 40)
-                        thb_Px,thb_Pm,thb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=thb_data_sample, fs=fnirs_sampling_rate, fBands=fnirs_band, nperseg = 40)
+                        hb_Px,hb_Pm,hb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hb_data_sample, fs=fnirs_sampling_rate, fBands=fnirs_band, nperseg = 40, Sum=True, Mean=True, SD =True)
+                        hbo_Px,hbo_Pm,hbo_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=hbo_data_sample, fs=fnirs_sampling_rate, fBands=fnirs_band, nperseg = 40, Sum=True, Mean=True, SD =True)
+                        thb_Px,thb_Pm,thb_Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=thb_data_sample, fs=fnirs_sampling_rate, fBands=fnirs_band, nperseg = 40, Sum=True, Mean=True, SD =True)
 
                         # print(hb_Px.shape, hb_Pm.shape, hb_Pd.shape) # (4,6) each
 
@@ -156,10 +156,10 @@ def EEG_RhythmicDecomposition_sliced(w_fnirs=False):
         patients = np.asarray(patients)
         print(patients.shape) # (26, 6, 3, 3, 4, 6)
 
-        np.save('./power_npy/sliced/' + levels[i] + '_fnirs_power.npy', patients)
+        np.save('./power_npy/sliced/' + levels[i] + '_fnirs_power_SMSD.npy', patients)
         print('>> npy saved.')
     ###################################################################################
-
+    
 
 
 def EEG_RhythmicDecomposition_full(w_fnirs=False):
@@ -192,7 +192,7 @@ def EEG_RhythmicDecomposition_full(w_fnirs=False):
                 if act_num == 0: # RO
                     data = act_data[:eeg_sampling_rate*60, :] # RO - 60 sec
                     # print(data.shape) # (30000, 32)
-                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fs=eeg_sampling_rate)
+                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fs=eeg_sampling_rate, Sum=True, Mean=True, SD =True)
                     # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
                     powers = np.stack([Px,Pm,Pd], axis=0)
                     # print(powers.shape)
@@ -201,7 +201,7 @@ def EEG_RhythmicDecomposition_full(w_fnirs=False):
 
                 else:
                     # print(act_data.shape) # (112112, 32)
-                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=act_data, fs=eeg_sampling_rate)
+                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=act_data, fs=eeg_sampling_rate, Sum=True, Mean=True, SD =True)
 
                     this_act_out = np.stack([Px, Pm, Pd], axis=0) # (3,6,32)
                     act_out[act_num] = this_act_out # (3,6,32)
@@ -211,7 +211,7 @@ def EEG_RhythmicDecomposition_full(w_fnirs=False):
         patients = np.asarray(patients)
         print(i, patients.shape) # (26, 6, 3, 6, 32)
 
-        np.save('./power_npy/full_sliced/' + levels[i] + '_eeg_power.npy', patients)
+        np.save('./power_npy/full_sliced/' + levels[i] + '_eeg_power_SMSD.npy', patients)
         print('>> npy saved.')
 
 
