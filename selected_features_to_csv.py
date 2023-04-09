@@ -62,7 +62,8 @@ if __name__ == "__main__":
 
     
     else:
-        hybrid_features_file = './rfecv_plots_200_act-1/RFECV_SKF_hybrid_10.txt'
+        fold_name = './rfecv_plots_200_act-0-1/'
+        hybrid_features_file = fold_name + 'RFECV_SKF_hybrid_10.txt'
         hybrid_features = []
         with open(hybrid_features_file, 'r') as hybrid:
             lines = hybrid.readlines()
@@ -78,5 +79,5 @@ if __name__ == "__main__":
         if not os.path.exists('./csv'):
             os.makedirs('./csv')
         df = pd.DataFrame(X_hybrid, columns=X_hybrid.columns)
-        df.to_csv('./csv/power_sliced_meansumstd_hybrid_200-C1.csv', sep=',')
+        df.to_csv('./csv/power_sliced_meansumstd_hybrid_200-R-C1.csv', sep=',')
 

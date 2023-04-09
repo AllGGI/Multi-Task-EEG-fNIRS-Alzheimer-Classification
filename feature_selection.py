@@ -160,7 +160,7 @@ def multiple_acts(total_X, total_y, act_list=[]): # 4752 / 6 -> 792
 
 if __name__ == "__main__":
 
-    hybrid = False
+    hybrid = True
     act_num = [0, 1] # Resting=0, C1=1, C2=2, N1=3, N2=4, V=5
 
     save_path='./rfecv_plots_200_act-' + '-'.join([str(i) for i in act_num]) + '/'
