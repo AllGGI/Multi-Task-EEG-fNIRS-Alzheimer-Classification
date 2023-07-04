@@ -1,0 +1,31 @@
+[142 rows x 5977 columns]
+>> save path: ./Ablation_comp1_my_fusion/results/PrevEEG_PrevfNIRS_0-1-2-3-4-5/Fold_0/
+>> EEG: 2050
+>> FNIRS: 187
+>> save path: ./Ablation_comp1_my_fusion/results/PrevEEG_PrevfNIRS_0-1-2-3-4-5/Fold_1/
+>> EEG: 75
+>> FNIRS: 104
+>> save path: ./Ablation_comp1_my_fusion/results/PrevEEG_PrevfNIRS_0-1-2-3-4-5/Fold_2/
+>> EEG: 2467
+>> FNIRS: 90
+>> save path: ./Ablation_comp1_my_fusion/results/PrevEEG_PrevfNIRS_0-1-2-3-4-5/Fold_3/
+>> EEG: 1215
+>> FNIRS: 187
+>> save path: ./Ablation_comp1_my_fusion/results/PrevEEG_PrevfNIRS_0-1-2-3-4-5/Fold_4/
+>> EEG: 2574
+>> FNIRS: 31
+>> Common hybrid features: 72
+['eeg_ch-30_band-LowAlpha_window-3_block-5', 'eeg_ch-2_band-Theta_window-0_block-0', 'fnirs_ch-2_HbO_window-2_block-2', 'fnirs_ch-1_Hb_window-0_block-5', 'eeg_ch-30_band-Beta_window-2_block-1', 'eeg_ch-12_band-Delta_window-1_block-5', 'fnirs_ch-4_Hb_window-1_block-5', 'eeg_ch-30_band-Beta_window-0_block-2', 'fnirs_ch-1_Hb_window-1_block-5', 'eeg_ch-20_band-LowAlpha_window-2_block-5', 'eeg_ch-12_band-Theta_window-2_block-4', 'eeg_ch-12_band-LowAlpha_window-1_block-4', 'eeg_ch-25_band-Gamma_window-2_block-1', 'eeg_ch-3_band-Delta_window-3_block-0', 'fnirs_ch-1_Hb_window-2_block-3', 'eeg_ch-21_band-Theta_window-4_block-5', 'fnirs_ch-0_Hb_window-0_block-5', 'fnirs_ch-0_HbO_window-2_block-2', 'fnirs_ch-2_Hb_window-0_block-3', 'eeg_ch-2_band-Delta_window-0_block-0', 'eeg_ch-23_band-Theta_window-0_block-0', 'fnirs_ch-2_HbO_window-1_block-2', 'eeg_ch-5_band-LowAlpha_window-0_block-1', 'eeg_ch-30_band-Beta_window-2_block-4', 'eeg_ch-15_band-Beta_window-1_block-0', 'eeg_ch-3_band-Theta_window-3_block-0', 'eeg_ch-23_band-HighAlpha_window-0_block-0', 'eeg_ch-2_band-LowAlpha_window-2_block-5', 'eeg_ch-30_band-Delta_window-0_block-3', 'fnirs_ch-1_Hb_window-1_block-0', 'eeg_ch-24_band-Theta_window-3_block-0', 'fnirs_ch-4_Hb_window-0_block-5', 'fnirs_ch-4_Hb_window-2_block-5', 'eeg_ch-30_band-LowAlpha_window-4_block-2', 'eeg_ch-30_band-Theta_window-0_block-2', 'eeg_ch-3_band-Gamma_window-3_block-0', 'fnirs_ch-0_HbO_window-0_block-1', 'fnirs_ch-2_Hb_window-1_block-3', 'eeg_ch-1_band-Beta_window-3_block-2', 'eeg_ch-12_band-HighAlpha_window-1_block-5', 'eeg_ch-12_band-Theta_window-1_block-5', 'fnirs_ch-5_Hb_window-0_block-0', 'fnirs_ch-2_HbO_window-0_block-2', 'eeg_ch-23_band-Beta_window-3_block-0', 'fnirs_ch-0_HbO_w>> Total sec: 1.221252202987671
+****************************************************************************************************
+>> Total sec: 1.2245430946350098
+****************************************************************************************************
+>> Acc: [0.7241, 0.6207, 0.8214, 0.5714, 0.75]
+>> F1: [0.7328, 0.529, 0.798, 0.5438, 0.7341]
+>> AUC: [0.9107, 0.849, 0.9036, 0.8227, 0.9026]
+>> Mean Acc: 0.6975
+>> Mean F1: 0.6675
+>> Mean AUC: 0.8777
+>> Confusion Matrix:
+[[16. 13.  6.]
+ [ 1. 51.  9.]
+ [ 2. 12. 32.]]

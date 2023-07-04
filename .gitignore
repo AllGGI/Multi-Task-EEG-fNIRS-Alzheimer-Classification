@@ -4,6 +4,12 @@ pickles/
 power_npy/
 temp*.py
 rfecv*/
+new_power_npy*/
+csv/
+fig/
+FINAL_results/
+inputs/
+*.npy
 
 ##################################################################
 # Byte-compiled / optimized / DLL files

@@ -1,0 +1,23 @@
+SKF
+>> Optimal number of features : 20 
+>> Selected features:
+fnirs_ch-0_Hb_window-0_block-1
+fnirs_ch-0_Hb_window-2_block-5
+fnirs_ch-0_HbO_window-0_block-1
+fnirs_ch-0_HbO_window-1_block-1
+fnirs_ch-0_HbO_window-1_block-2
+fnirs_ch-0_HbO_window-2_block-2
+fnirs_ch-1_Hb_window-0_block-5
+fnirs_ch-1_Hb_window-1_block-5
+fnirs_ch-1_Hb_window-2_block-5
+fnirs_ch-2_Hb_window-1_block-3
+fnirs_ch-2_Hb_window-2_block-5
+fnirs_ch-2_HbO_window-0_block-2
+fnirs_ch-2_HbO_window-1_block-2
+fnirs_ch-2_HbO_window-2_block-2
+fnirs_ch-3_Hb_window-0_block-1
+fnirs_ch-3_HbO_window-1_block-0
+fnirs_ch-4_Hb_window-0_block-5
+fnirs_ch-4_Hb_window-1_block-5
+fnirs_ch-4_Hb_window-2_block-5
+fnirs_ch-4_HbO_window-2_block-0

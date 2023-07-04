@@ -1,0 +1,26 @@
+>> Optimal number of features : 23 
+>> Max accuracy: 0.6434
+>> Selected features:
+eeg_ch-30_band-Beta_window-1_block-3
+eeg_ch-3_band-HighAlpha_window-4_block-1
+eeg_ch-2_band-Theta_window-4_block-1
+eeg_ch-28_band-Theta_window-2_block-1
+eeg_ch-31_band-Theta_window-2_block-1
+eeg_ch-30_band-LowAlpha_window-4_block-1
+eeg_ch-30_band-Beta_window-3_block-3
+eeg_ch-28_band-LowAlpha_window-0_block-5
+eeg_ch-25_band-Delta_window-1_block-2
+eeg_ch-28_band-Theta_window-0_block-1
+eeg_ch-3_band-LowAlpha_window-4_block-1
+eeg_ch-26_band-LowAlpha_window-4_block-1
+eeg_ch-21_band-Theta_window-0_block-1
+eeg_ch-9_band-Delta_window-4_block-4
+eeg_ch-16_band-Theta_window-0_block-1
+eeg_ch-10_band-Gamma_window-4_block-0
+eeg_ch-24_band-Beta_window-3_block-4
+eeg_ch-2_band-Theta_window-2_block-3
+eeg_ch-30_band-HighAlpha_window-1_block-1
+eeg_ch-25_band-Beta_window-4_block-3
+eeg_ch-24_band-Theta_window-3_block-5
+eeg_ch-25_band-Beta_window-3_block-1
+eeg_ch-13_band-LowAlpha_window-4_block-0

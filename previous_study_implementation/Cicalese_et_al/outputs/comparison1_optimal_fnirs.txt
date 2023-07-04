@@ -1,0 +1,12 @@
+>> Optimal number of features : 9 
+>> Max accuracy: 0.5139
+>> Selected features:
+fnirs_ch-1_Hb_window-0_block-0
+fnirs_ch-1_HbO_window-1_block-0
+fnirs_ch-1_HbO_window-2_block-0
+fnirs_ch-2_HbO_window-1_block-1
+fnirs_ch-4_HbO_window-1_block-1
+fnirs_ch-2_HbO_window-2_block-0
+fnirs_ch-2_Hb_window-1_block-1
+fnirs_ch-0_Hb_window-1_block-1
+fnirs_ch-4_HbO_window-1_block-0
