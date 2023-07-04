@@ -27,8 +27,8 @@ from torch.utils.data import DataLoader
 from torch.utils.data.dataset import Dataset
 
 # My files
-from P4_make_index import make_index
-from P4_get_intersection_of_optimal_features import get_intersection_of_folds
+from P4_v1_make_index import make_index
+from P4_v1_get_intersection_of_optimal_features import get_intersection_of_folds
 
 
 def RFECV4AD(X, y, data_type, estimator, step, cv_num, min_features, save_pth):

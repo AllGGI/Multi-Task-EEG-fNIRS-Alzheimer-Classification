@@ -6,8 +6,8 @@ from time import time
 import spkit as sp
 
 # My files
-from P4_make_index import make_index
-from P4_get_intersection_of_optimal_features import get_intersection_of_folds
+from P4_v1_make_index import make_index
+from P4_v1_get_intersection_of_optimal_features import get_intersection_of_folds
 
 def multiple_acts(total_X, total_y, act_list=[0,1,2,3,4,5], norm=True): # 4752 / 6 -> 792
 
