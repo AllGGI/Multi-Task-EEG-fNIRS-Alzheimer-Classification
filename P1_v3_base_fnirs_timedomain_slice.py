@@ -490,7 +490,9 @@ def make_sliced_data_pkl(pths, root_path, trig_list):
 
     return loaded_data
 
-if __name__ == "__main__":
+
+
+def segmentation_timedomain_base():
     
     # make data list
     eeg_path = "D:\치매감지\EEG_fNIRs_dataset\Sorted_Dataset\Sorted_alzh_dataset/".replace('\\', '/')

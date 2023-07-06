@@ -51,7 +51,7 @@ def multiple_acts(total_X, total_y, act_list=[], norm=True): # 4752 / 6 -> 792
     return ret
 
 
-if __name__ == "__main__":
+def multimodal2csv():
 
     act_num = [0,1,2,3,4,5] # Resting=0, C1=1, C2=2, N1=3, N2=4, V=5
     time_sec = 5
@@ -103,22 +103,21 @@ if __name__ == "__main__":
     # 5: EEG PSD
     for option in range(1,6):
         print('\n>> Current option:', option)
-        if option == 1: # origin
+        if option == 1: # EEG + fNIRS
             complex_df = pd.concat([needed_X_eeg_psd, needed_X_fnirs_psd, needed_X_fnirs_timedomain], axis=1)
             save_csv_name = str(time_sec) + 'secEEGPSD_FullFnirsPSD_FullFnirsTimeDomain_NEW'
         elif option == 2:
-            complex_df = pd.concat([needed_X_eeg_psd, needed_X_fnirs_psd], axis=1)
-            save_csv_name = 'opt-' + str(option) + '_' + str(time_sec) + 'secEEGPSD_FullFnirsPSD'
-        elif option == 3:
-            complex_df = pd.concat([needed_X_eeg_psd, needed_X_fnirs_timedomain], axis=1)
-            save_csv_name = 'opt-' + str(option) + '_' + str(time_sec) + 'secEEGPSD_FullFnirsTimeDomain'
-        elif option == 4:
-            complex_df = pd.concat([needed_X_fnirs_psd, needed_X_fnirs_timedomain], axis=1)
-            save_csv_name = 'opt-' + str(option) + '_' + 'FullFnirsPSD_FullFnirsTimeDomain'
-        elif option == 5:
             complex_df = pd.concat([needed_X_eeg_psd], axis=1)
             save_csv_name = 'opt-' + str(option) + '_' + str(time_sec) + 'secEEGPSD'
-
+        elif option == 3: # fNIRS
+            complex_df = pd.concat([needed_X_fnirs_psd, needed_X_fnirs_timedomain], axis=1)
+            save_csv_name = 'opt-' + str(option) + '_' + 'FullFnirsPSD_FullFnirsTimeDomain'
+        # elif option == 4:
+        #     complex_df = pd.concat([needed_X_eeg_psd, needed_X_fnirs_psd], axis=1)
+        #     save_csv_name = 'opt-' + str(option) + '_' + str(time_sec) + 'secEEGPSD_FullFnirsPSD'
+        # elif option == 5:
+        #     complex_df = pd.concat([needed_X_eeg_psd, needed_X_fnirs_timedomain], axis=1)
+        #     save_csv_name = 'opt-' + str(option) + '_' + str(time_sec) + 'secEEGPSD_FullFnirsTimeDomain'
         
         complex_df.insert(0, 'label', y_eeg_5sec_psd_df)
         complex_df = complex_df.dropna(axis=0)
@@ -128,6 +127,5 @@ if __name__ == "__main__":
         
         complex_df.to_csv('./csv_folder/Experiment2/' + save_csv_name + '.csv', sep=',')
         print(save_csv_name + '.csv saved.')
-
 
 

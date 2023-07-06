@@ -6,7 +6,7 @@ import spkit as sp
 import os
 
 
-def EEG_RhythmicDecomposition_sliced(alllevel_eeg_data, slice_sec):
+def EEG_RhythmicDecomposition_sliced(levels, alllevel_eeg_data, slice_sec):
     '''
         Decompose EEG Signal(s)-all the channels in Rhythms and compute power in each band for each channel
         --------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ def EEG_RhythmicDecomposition_sliced(alllevel_eeg_data, slice_sec):
 
     
 
-def FNIRS_RhythmicDecomposition_sliced(alllevel_fnirs_data, slice_sec):
+def FNIRS_RhythmicDecomposition_sliced(levels, alllevel_fnirs_data, slice_sec):
 
     ###################################################################################
     fnirs_sampling_rate = 8
@@ -256,7 +256,7 @@ def FNIRS_RhythmicDecomposition_sliced(alllevel_fnirs_data, slice_sec):
 
 
 
-# def EEG_RhythmicDecomposition_full(alllevel_eeg_data):
+# def EEG_RhythmicDecomposition_full(levels, alllevel_eeg_data):
 #     '''
 #         Decompose EEG Signal(s)-all the channels in Rhythms and compute power in each band for each channel
 #         --------------------------------------------------------------------------------------------------
@@ -342,7 +342,7 @@ def FNIRS_RhythmicDecomposition_sliced(alllevel_fnirs_data, slice_sec):
 #     ###################################################################################
     
 
-def FNIRS_RhythmicDecomposition_full(alllevel_fnirs_data):
+def FNIRS_RhythmicDecomposition_full(levels, alllevel_fnirs_data):
 
     ###################################################################################
     fnirs_sampling_rate = 8
@@ -460,84 +460,81 @@ def FNIRS_RhythmicDecomposition_full(alllevel_fnirs_data):
 
 
 
-if __name__ == "__main__":
+def psd_feature_extraction():
+
     slice_sec_num = 5
 
-    sliced = False
-    with_fnirs = True
+    ###################################################################################
+    # Sliced
+
+    sliced_pth = './pickles/eeg-' + str(slice_sec_num) + 'sec_fnirs-full_baselinecorrected_fnirs_sliced.pkl'
+    new_AD_sliced_pth = './pickles/new-AD_eeg-' + str(slice_sec_num) + 'sec_fnirs-full_baselinecorrected_fnirs_sliced.pkl'
+
+    if not os.path.exists('./inputs/' + str(slice_sec_num) + '-sec/'):
+        os.makedirs('./inputs/' + str(slice_sec_num) + '-sec/')
+
+    with open(sliced_pth, 'rb') as f:
+        loaded_data = pickle.load(f) # ad, cn, ns, pre order
+        print('>> ' + sliced_pth + ' loaded.')
+
+    levels = ['AD', 'NORMAL', 'MCI']
+    ad_eeg = loaded_data[0]['EEG']
+    norm_eeg = loaded_data[1]['EEG']
+    mci_eeg = loaded_data[3]['EEG']
+
+    ad_fnirs = loaded_data[0]['fNIRs']
+    norm_fnirs = loaded_data[1]['fNIRs']
+    mci_fnirs = loaded_data[3]['fNIRs']
 
 
-    if sliced:
+    with open(new_AD_sliced_pth, 'rb') as f:
+        new_loaded_data = pickle.load(f) # ad, cn, ns, pre order
+        print('>> ' + new_AD_sliced_pth + ' loaded.')    
+    ad_eeg += new_loaded_data[0]['EEG']
+    ad_fnirs += new_loaded_data[0]['fNIRs']
 
-        sliced_pth = './pickles/eeg-' + str(slice_sec_num) + 'sec_fnirs-full_baselinecorrected_fnirs_sliced.pkl'
-        new_AD_sliced_pth = './pickles/new-AD_eeg-' + str(slice_sec_num) + 'sec_fnirs-full_baselinecorrected_fnirs_sliced.pkl'
+    print(len(ad_eeg), len(norm_eeg), len(mci_eeg))
+    all_levels_eeg = [ad_eeg, norm_eeg, mci_eeg]
+    print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
+    all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
 
-        if not os.path.exists('./inputs/' + str(slice_sec_num) + '-sec/'):
-            os.makedirs('./inputs/' + str(slice_sec_num) + '-sec/')
+    EEG_RhythmicDecomposition_sliced(levels, all_levels_eeg, slice_sec=slice_sec_num)
+    # FNIRS_RhythmicDecomposition_sliced(levels, all_levels_fnirs, slice_sec=slice_sec_num)
 
-        with open(sliced_pth, 'rb') as f:
-            loaded_data = pickle.load(f) # ad, cn, ns, pre order
-            print('>> ' + sliced_pth + ' loaded.')
+    ###################################################################################
+    # full
+    full_pth = './pickles/eeg_full_fnirs_full_baselinecorrected.pkl'
+    new_AD_full_pth = './pickles/new-AD_eeg_full_fnirs_full_baselinecorrected.pkl'
 
-        levels = ['AD', 'NORMAL', 'MCI']
-        ad_eeg = loaded_data[0]['EEG']
-        norm_eeg = loaded_data[1]['EEG']
-        mci_eeg = loaded_data[3]['EEG']
+    if not os.path.exists('./inputs/full/'):
+        os.makedirs('./inputs/full/')
 
-        ad_fnirs = loaded_data[0]['fNIRs']
-        norm_fnirs = loaded_data[1]['fNIRs']
-        mci_fnirs = loaded_data[3]['fNIRs']
+    with open(full_pth, 'rb') as f:
+        loaded_data = pickle.load(f) # ad, cn, ns, pre order
+        print('>> ' + full_pth + ' loaded.')
 
+    levels = ['AD', 'NORMAL', 'MCI']
+    ad_eeg = loaded_data[0]['EEG']
+    norm_eeg = loaded_data[1]['EEG']
+    mci_eeg = loaded_data[3]['EEG']
 
-        with open(new_AD_sliced_pth, 'rb') as f:
-            new_loaded_data = pickle.load(f) # ad, cn, ns, pre order
-            print('>> ' + new_AD_sliced_pth + ' loaded.')    
-        ad_eeg += new_loaded_data[0]['EEG']
-        ad_fnirs += new_loaded_data[0]['fNIRs']
-
-        print(len(ad_eeg), len(norm_eeg), len(mci_eeg))
-        all_levels_eeg = [ad_eeg, norm_eeg, mci_eeg]
-        print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
-        all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
-
-        EEG_RhythmicDecomposition_sliced(all_levels_eeg, slice_sec=slice_sec_num)
-        # FNIRS_RhythmicDecomposition_sliced(all_levels_fnirs, slice_sec=slice_sec_num)
-
-
-    else:
-
-        full_pth = './pickles/eeg_full_fnirs_full_baselinecorrected.pkl'
-        new_AD_full_pth = './pickles/new-AD_eeg_full_fnirs_full_baselinecorrected.pkl'
-
-        if not os.path.exists('./inputs/full/'):
-            os.makedirs('./inputs/full/')
-
-        with open(full_pth, 'rb') as f:
-            loaded_data = pickle.load(f) # ad, cn, ns, pre order
-            print('>> ' + full_pth + ' loaded.')
-
-        levels = ['AD', 'NORMAL', 'MCI']
-        ad_eeg = loaded_data[0]['EEG']
-        norm_eeg = loaded_data[1]['EEG']
-        mci_eeg = loaded_data[3]['EEG']
-
-        ad_fnirs = loaded_data[0]['fNIRs']
-        norm_fnirs = loaded_data[1]['fNIRs']
-        mci_fnirs = loaded_data[3]['fNIRs']
+    ad_fnirs = loaded_data[0]['fNIRs']
+    norm_fnirs = loaded_data[1]['fNIRs']
+    mci_fnirs = loaded_data[3]['fNIRs']
 
 
-        with open(new_AD_full_pth, 'rb') as f:
-            new_loaded_data = pickle.load(f) # ad, cn, ns, pre order
-            print('>> ' + new_AD_full_pth + ' loaded.')    
-        ad_eeg += new_loaded_data[0]['EEG']
-        ad_fnirs += new_loaded_data[0]['fNIRs']
+    with open(new_AD_full_pth, 'rb') as f:
+        new_loaded_data = pickle.load(f) # ad, cn, ns, pre order
+        print('>> ' + new_AD_full_pth + ' loaded.')    
+    ad_eeg += new_loaded_data[0]['EEG']
+    ad_fnirs += new_loaded_data[0]['fNIRs']
 
-        print(len(ad_eeg), len(norm_eeg), len(mci_eeg))
-        all_levels_eeg = [ad_eeg, norm_eeg, mci_eeg]
-        print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
-        all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
+    print(len(ad_eeg), len(norm_eeg), len(mci_eeg))
+    all_levels_eeg = [ad_eeg, norm_eeg, mci_eeg]
+    print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
+    all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
 
 
-        # EEG_RhythmicDecomposition_full(all_levels_eeg)
-        FNIRS_RhythmicDecomposition_full(all_levels_fnirs)
+    # EEG_RhythmicDecomposition_full(levels, all_levels_eeg)
+    FNIRS_RhythmicDecomposition_full(levels, all_levels_fnirs)
 

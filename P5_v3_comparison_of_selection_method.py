@@ -32,8 +32,8 @@ def find_optimal_features(X_source, y_source, init_feat):
     return optimal_feat, max_acc
 
 
-def load_csv():
-    loaded_df = pd.read_csv('./Experimental_results/Experiment3/outputs/comparison1_eegfnirs_allact.csv')
+def load_csv(csv_root):
+    loaded_df = pd.read_csv(csv_root + 'comparison1_eegfnirs_allact.csv')
     
 
     loaded_df = loaded_df.drop('Unnamed: 0', axis=1)
@@ -42,9 +42,9 @@ def load_csv():
 
     return loaded_df
 
-def feature_selection():
+def PrevStudy_feature_selection(csv_root):
 
-    df = load_csv()
+    df = load_csv(csv_root)
     X_total = df.drop('label', axis=1)
     y = df['label']
 
@@ -129,7 +129,7 @@ def feature_selection():
         for feat in optimal_hybrid_feat:
             f.write(feat + '\n')
 
-def test():
+def PrevStudy_test(csv_root, save_root):
     '''
         Test selected features with LDA
     '''
@@ -149,13 +149,13 @@ def test():
     #         optimal_fnirs_feat.append(feat)
     # Hybrid
     optimal_hybrid_feat = []
-    with open('./Experimental_results/Experiment3/results/Prev_Extraction_Prev_Selection/comparison1_optimal_hybrid.txt', 'r') as hybrid:
+    with open(save_root + 'Prev_Extraction_Prev_Selection/comparison1_optimal_hybrid.txt', 'r') as hybrid:
         lines = hybrid.readlines()
         for line_idx in range(3, len(lines)):
             feat = lines[line_idx].replace('\n', '')
             optimal_hybrid_feat.append(feat)
     
-    df = load_csv()
+    df = load_csv(csv_root)
     selected_X = df.drop('label', axis=1)[optimal_hybrid_feat]
     label = df['label']
 
@@ -189,7 +189,7 @@ def test():
 
 
     proba_list = np.stack(proba_list, axis=0)
-    print(proba_list.shape, label.shape)
+    # print(proba_list.shape, label.shape)
     print('>> Mean Acc:', np.round(np.mean(acc_list), 4))
     print('>> Mean F1:', np.round(np.mean(f1_list), 4))
     print('>> AUC:', np.round(roc_auc_score(label, proba_list, average='macro', multi_class='ovr'), 4))
@@ -203,11 +203,6 @@ def test():
     plt.show()
 
 
-if __name__ == "__main__":
 
-    # >> 4. Feature selection & 5. Classification
-    feature_selection()
 
-    # >> 6. Test
-    test()
 

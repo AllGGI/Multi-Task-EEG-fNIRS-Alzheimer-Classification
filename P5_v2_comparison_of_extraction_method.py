@@ -205,7 +205,7 @@ def comparison1_fnirs(fnirs_list, levels, input_pth):
         np.save(input_pth + levels[level_idx] + '_fnirs_avg.npy', patients)
         print('>> npy saved.')
 
-def comparison1_data2csv(levels, input_pth):
+def comparison1_data2csv(levels, input_pth, output_path):
     fnirs_window_num = 3
 
     eeg_npy, fnirs_npy = {}, {}
@@ -326,7 +326,7 @@ def my_fnirs_features():
 
     return my_fnirs_X, my_fnirs_y
 
-def comparison1_loadcsv(load_pth):
+def comparison1_loadcsv(load_pth, act_num):
     open_csv = load_pth + 'comparison1_eegfnirs_allact.csv'
     df = pd.read_csv(open_csv)
     df = df.drop('Unnamed: 0', axis=1)
@@ -345,11 +345,11 @@ def comparison1_loadcsv(load_pth):
 
 
 
-if __name__ == "__main__":
+def extraction_comparison2csv(act_num):
     
     levels = ['AD', 'NORMAL', 'MCI']
     input_path = './inputs/Experiment3/'
-    output_path = './Experimental_results/Experiment3/outputs/'
+    output_path = './csv_folder/Experiment3/'
 
     if not os.path.exists(input_path):
         os.makedirs(input_path)
@@ -357,17 +357,13 @@ if __name__ == "__main__":
         os.makedirs(output_path)
 
     # 1) Make CSV of My data + Previous method
-    # E_list, f_list = load_pickle()
-    # comparison1_eeg(E_list, levels, input_path)
-    # comparison1_fnirs(f_list, levels, input_path)
-    # comparison1_data2csv(levels, input_path)
+    E_list, f_list = load_pickle()
+    comparison1_eeg(E_list, levels, input_path)
+    comparison1_fnirs(f_list, levels, input_path)
+    comparison1_data2csv(levels, input_path, output_path)
 
     # 2) Load My EEG/fNIRS + Previous EEG/fNIRS
-    exp_num = 2
-    act_num = [0,1,2,3,4,5] # Resting=0, C1=1, C2=2, N1=3, N2=4, V=5
-    pth = '5secEEGPSD_FullFnirsPSD_FullFnirsTimeDomain'
-
-    comp_X_eeg, comp_X_fnirs = comparison1_loadcsv(output_path)
+    comp_X_eeg, comp_X_fnirs = comparison1_loadcsv(output_path, act_num)
     my_X_eeg, my_y_eeg = my_eeg_features()
     my_X_fnirs, my_y_fnirs = my_fnirs_features()
 

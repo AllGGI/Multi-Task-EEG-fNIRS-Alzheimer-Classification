@@ -1,0 +1,9 @@
+>> YOUR parameters for classification:
+
+gpu = 0,1,2,3
+mode = classification
+exp = 2
+task = R,C,N,V
+seed = 1263
+cv_num = 5
+clf_type = Tree

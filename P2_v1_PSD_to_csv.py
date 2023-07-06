@@ -4,38 +4,43 @@ import os
 
 levels = ['AD', 'NORMAL', 'MCI']
 features = ['Px', 'Pm', 'Pd']
-
-eeg_cols = []
-eeg_bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma1', 'Gamma2']
-eeg_channels = 32
-for act in range(6):
-    for p in range(len(features)):
-        for band in range(len(eeg_bands)):
-            for ch in range(32):
-                col_name = 'eeg_act-' + str(act) + '_feat-' + features[p] + '_band-' + eeg_bands[band] + '_ch-' + str(ch)
-                eeg_cols.append(col_name)
-
-print(len(eeg_cols)) # 3456
-
-fnirs_cols = []
-fnirs_bands = ['vlfo', 'lfo'] # [[0.01, 0.04], [0.04, 0.15]]
 fnirs_hb = ['Hb', 'HbO', 'THb']
-fnirs_channels = 6
-for act in range(6): # (6act, 3hb, 3px, 4band, 6ch)
-    for h in range(len(fnirs_hb)):
+
+eeg_bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma1', 'Gamma2']
+fnirs_bands = ['vlfo', 'lfo'] # [[0.01, 0.04], [0.04, 0.15]]
+
+
+def make_cols():
+
+    eeg_cols = []
+    eeg_channels = 32
+    for act in range(6):
         for p in range(len(features)):
-            for band in range(len(fnirs_bands)):
-                for ch in range(6):
-                    col_name = 'fnirs_act-' + str(act) + '_' + fnirs_hb[h] + '_feat-' + features[p] + '_band-' + fnirs_bands[band] + '_ch-' + str(ch)
-                    fnirs_cols.append(col_name)
+            for band in range(len(eeg_bands)):
+                for ch in range(32):
+                    col_name = 'eeg_act-' + str(act) + '_feat-' + features[p] + '_band-' + eeg_bands[band] + '_ch-' + str(ch)
+                    eeg_cols.append(col_name)
 
-print(len(fnirs_cols)) # 1296
+    print(len(eeg_cols)) # 3456
+
+    fnirs_cols = []
+    fnirs_channels = 6
+    for act in range(6): # (6act, 3hb, 3px, 4band, 6ch)
+        for h in range(len(fnirs_hb)):
+            for p in range(len(features)):
+                for band in range(len(fnirs_bands)):
+                    for ch in range(6):
+                        col_name = 'fnirs_act-' + str(act) + '_' + fnirs_hb[h] + '_feat-' + features[p] + '_band-' + fnirs_bands[band] + '_ch-' + str(ch)
+                        fnirs_cols.append(col_name)
+
+    print(len(fnirs_cols)) # 1296
+
+    return eeg_cols, fnirs_cols
 
 
 
-def sliced2csv(load_pth, save_csv_name):
+def sliced2csv(eeg_cols, fnirs_cols, load_pth, save_csv_name):
 
-    ################################################################################
     # EEG
     EEG_all_levels = []
     for level in levels:
@@ -128,8 +133,9 @@ def sliced2csv(load_pth, save_csv_name):
     # print(X)
 
 
-if __name__ == "__main__":
+def psd2csv():
 
-    # sliced2csv(load_pth='./inputs/5-sec/', save_csv_name='Source1-5sec_eeg_fnirs_power_sliced')
-    sliced2csv(load_pth='./inputs/full/', save_csv_name='Source2-full_eeg_fnirs_psd')
+    eeg_cols, fnirs_cols = make_cols()
+    sliced2csv(eeg_cols, fnirs_cols, load_pth='./inputs/5-sec/', save_csv_name='Source1-5sec_eeg_fnirs_power_sliced')
+    sliced2csv(eeg_cols, fnirs_cols, load_pth='./inputs/full/', save_csv_name='Source2-full_eeg_fnirs_psd')
 

@@ -45,7 +45,7 @@ def simple_processing_fnirs(levels_list):
     fnirs_ch = 6
 
     patient_out = []
-    for label, level_data in enumerate(all_levels_fnirs): # ad 26 -> norm 64 -> mci 46
+    for label, level_data in enumerate(levels_list): # ad 26 -> norm 64 -> mci 46
         for patient in level_data: # 26
             act_out = [[] for i in range(6)]
             for act_num, act_data in enumerate(patient): # 6 = RO, C1, C2, N1, N2, V
@@ -126,7 +126,7 @@ def simple_processing_fnirs(levels_list):
     return flattened_data # flattened 'patient_all_data_normalized'
 
 
-if __name__ == "__main__":
+def timedomain2csv():
     
     sliced_pth = './pickles/original_fnirs_before_ing_after.pkl'
     new_AD_sliced_pth = './pickles/new-AD_fnirs_before_ing_after.pkl'
@@ -190,4 +190,5 @@ if __name__ == "__main__":
     print('>> csv saved.')
 
     print(df)
+
 

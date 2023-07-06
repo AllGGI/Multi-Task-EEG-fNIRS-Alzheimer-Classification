@@ -10,8 +10,8 @@ def make_index(act_num, pth, csv_root, save_root):
     df = pd.read_csv(open_csv)
     df = df.drop('Unnamed: 0', axis=1)
     df = df[np.isfinite(df).all(1)]
-    print('>> Dataframe:\n')
-    print(df)
+    # print('>> Dataframe:\n')
+    # print(df)
 
     X_total = df.drop('label', axis=1)
     y = df['label']
