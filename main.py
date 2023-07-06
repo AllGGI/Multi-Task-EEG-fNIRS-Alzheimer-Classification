@@ -26,29 +26,6 @@ from P5_v3_comparison_of_selection_method import PrevStudy_feature_selection, Pr
 
 def main(args):
 
-    # TODO: Experiment 1,2,3 나누기
-    # Experiment 종류에 따라 csv_root, save_root 다르게쓰기
-    # save_root = './Experimental_results/RFECV_results/'
-    # csv_root = './csv_folder/Experiment2/'
-
-
-    # TODO: Experiment, 그리고 그안의 어떤 실험이냐에 따라 act_num 바꿔넣기
-    # For Experiment_1, act_num = [0] ~ [0,1,2,3,4,5]
-    # For Experiment_2 & _3, act_num = [0,1,2,3,4,5]
-
-    # TODO: pth도 어떤 Experiment, 그안의 어떤 실험이냐에 따라 임의로 지정해주기 (예시는 바로 아래)
-    '''
-    # Experiment 1
-
-
-    # Ablation study: HC vs MCI
-    # pth = '5secEEGPSD_FullFnirsPSD_FullFnirsTimeDomain_only_HC_MCI'
-    # save_root = './Experimental_results/Ablation_2class/results/'
-    # csv_root = './Experimental_results/Ablation_2class/outputs/'
-    print('>> Csv file name:', pth)
-    '''
-
-
     # mode: [segmentation / extraction / selection / classification]
     if args.mode == "segmentation":
         # make pickles from EEG/fNIRS .mat files
@@ -102,7 +79,6 @@ def main(args):
             PrevStudy_feature_selection(csv_root)
 
         
-
     elif args.mode == "classification":
         task_dict = {'R': [0], 'C': [1,2], 'N': [3,4], 'V': [5]}
         save_root = './Experimental_results/Experiment' + str(args.exp) + '/'
@@ -144,6 +120,7 @@ def main(args):
             print('='*100)
             print('>> Experiment 3-E:')
             PrevStudy_test(csv_root, save_root)
+
 
     else:
         print('>> Please execute with mode: ex) --mode "selection"')
