@@ -1,7 +1,7 @@
 import os
 
 # My files
-from P0_config import get_config
+from config import get_config
 from P1_v1_base_slice_sec import segmentation_slice_base
 from P1_v1_extraAD_slice_sec import segmentation_slice_extra
 from P1_v2_base_slice_full import segmentation_full_base
