@@ -12,6 +12,7 @@
       <li><a href="#how-to-run">How to run</a></li>
     </ul>
   </li>
+  <li><a href="#experimental-results">Experimental Results</a></li>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -31,15 +32,15 @@ Through our proposed event-specific feature extraction method, we extracted dist
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is an example of ~.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+TODO: Add requirements.txt
+
+* spkit
   ```sh
-  npm install npm@latest -g
+  pip install spkit
   ```
 
 ### How to run
@@ -51,25 +52,49 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
+3. Install prerequisites
    ```sh
-   npm install
+   pip install -r requirements.txt
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-> This dataset was experimented on different model configurations:             
+<!-- EXPERIMENTAL RESULTS -->
+## Experimental Results
 
-|  <center> Model </center> |  <center> Train Acc </center> |  <center> Valid Acc</center> |         
-|:--------:|--------:|--------:|         
-|**Resnet** | <center> % </center> | <center> % </center> |        
-|**Resnet (7,3)** | <center> % </center> | <center> % </center> |        
-|**Wide Resnet** | <center> % </center> | <center> % </center> |         
+> Experiment 1. Evaluating the Contribution of Each Task in Alzheimer’s Classification
+
+| <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
+|:--------:|--------:|--------:|--------:| 
+|**Exp 1-A** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 1-B** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 1-C** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 1-D** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 1-E** | <center> % </center> | <center> % </center> | <center> % </center> |
+
+
+> Experiment 2. Evaluating the Contribution of Using Both EEG and fNIRS Signals in Alzheimer’s Classification
+
+| <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
+|:--------:|--------:|--------:|--------:| 
+|**Exp 2-A** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 2-B** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 2-C** | <center> % </center> | <center> % </center> | <center> % </center> |
+
+
+> Experiment 3. Comparative Analysis with [Prior Research](https://www.sciencedirect.com/science/article/pii/S0165027020300406) Method
+
+
+| <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
+|:--------:|--------:|--------:|--------:| 
+|**Exp 3-A** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 3-B** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 3-C** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 3-D** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 3-E** | <center> % </center> | <center> % </center> | <center> % </center> |
+
 
 
 <!-- USAGE EXAMPLES -->
@@ -96,14 +121,8 @@ Sunghyeon Kim - hahala25@kaist.ac.kr
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+* [Signal Processing toolkit (spkit)](https://github.com/Nikeshbajaj/spkit/tree/master)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
