@@ -13,7 +13,6 @@
     </ul>
   </li>
   <li><a href="#experimental-results">Experimental Results</a></li>
-  <li><a href="#usage">Usage</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ol>
@@ -32,11 +31,9 @@ Through our proposed event-specific feature extraction method, we extracted dist
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of ~.
-
 ### Prerequisites
 
-TODO: Add requirements.txt
+> **TODO: Add requirements.txt**
 
 * spkit
   ```sh
@@ -45,16 +42,23 @@ TODO: Add requirements.txt
 
 ### How to run
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install prerequisites
+2. Install prerequisites
    ```sh
    pip install -r requirements.txt
+   ```
+3. Run main.py
+   ```sh
+   python main.py --gpu [GPU ID to use]
+                  --mode [segmentation | extraction | selection | classification(default)]
+                  --exp [1(default) - Tasks | 2 - Modals | 3 - Previous study]
+                  --task [R(Resting) | C(Oddball) | N(1-back) | V(Verbal fluency)]
+                  --seed [Random seed number]
+                  --cv_num [Number of cross-validation folds]
+                  --clf_type [Tree(default) | SVM | RF | MLP]
    ```
 
 
@@ -68,20 +72,20 @@ _Below is an example of how you can instruct your audience on installing and set
 
 | <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|--------:|--------:|--------:| 
-|**Exp 1-A** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 1-B** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 1-C** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 1-D** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 1-E** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 1-A** | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
+|**Exp 1-B** | <center> 0.8047 </center> | <center> 0.8095 </center> | <center> 0.9151 </center> |
+|**Exp 1-C** | <center> 0.7845 </center> | <center> 0.7830 </center> | <center> 0.9030 </center> |
+|**Exp 1-D** | <center> 0.7362 </center> | <center> 0.7440 </center> | <center> 0.8741 </center> |
+|**Exp 1-E** | <center> 0.7357 </center> | <center> 0.7497 </center> | <center> 0.8798 </center> |
 
 
 > Experiment 2. Evaluating the Contribution of Using Both EEG and fNIRS Signals in Alzheimer’s Classification
 
 | <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|--------:|--------:|--------:| 
-|**Exp 2-A** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 2-B** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 2-C** | <center> % </center> | <center> % </center> | <center> % </center> |
+|**Exp 2-A** | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
+|**Exp 2-B** | <center> 0.7079 </center> | <center> 0.7002 </center> | <center> 0.8847 </center> |
+|**Exp 2-C** | <center> 0.6345 </center> | <center> 0.6336 </center> | <center> 0.7349 </center> |
 
 
 > Experiment 3. Comparative Analysis with [Prior Research](https://www.sciencedirect.com/science/article/pii/S0165027020300406) Method
@@ -89,20 +93,11 @@ _Below is an example of how you can instruct your audience on installing and set
 
 | <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|--------:|--------:|--------:| 
-|**Exp 3-A** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 3-B** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 3-C** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 3-D** | <center> % </center> | <center> % </center> | <center> % </center> |
-|**Exp 3-E** | <center> % </center> | <center> % </center> | <center> % </center> |
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+|**Exp 3-A** | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
+|**Exp 3-B** | <center> 0.6855 </center> | <center> 0.6924 </center> | <center> 0.8359 </center> |
+|**Exp 3-C** | <center> 0.6894 </center> | <center> 0.6753 </center> | <center> 0.8702 </center> |
+|**Exp 3-D** | <center> 0.6975 </center> | <center> 0.6675 </center> | <center> 0.8777 </center> |
+|**Exp 3-E** | <center> 0.5944 </center> | <center> 0.5944 </center> | <center> 0.6890 </center> |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -110,7 +105,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- CONTACT -->
 ## Contact
 
-Sunghyeon Kim - hahala25@kaist.ac.kr
+Sunghyeon Kim - hahala25@yonsei.ac.kr
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
