@@ -70,26 +70,25 @@ Through our proposed event-specific feature extraction method, we extracted dist
 
 > Experiment 1. Evaluating the Contribution of Each Task in Alzheimer’s Classification
 
-| <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
-|:--------:|--------:|--------:|--------:| 
-|**Exp 1-A** | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
-|**Exp 1-B** | <center> 0.8047 </center> | <center> 0.8095 </center> | <center> 0.9151 </center> |
-|**Exp 1-C** | <center> 0.7845 </center> | <center> 0.7830 </center> | <center> 0.9030 </center> |
-|**Exp 1-D** | <center> 0.7362 </center> | <center> 0.7440 </center> | <center> 0.8741 </center> |
-|**Exp 1-E** | <center> 0.7357 </center> | <center> 0.7497 </center> | <center> 0.8798 </center> |
+| <center>  </center> | <center> Resting </center> | <center> 1-back </center> | <center> Oddball </center> | <center> Verbal </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
+|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+|**Exp 1-A** | <center> O </center> | <center> O </center> | <center> O </center> | <center> O </center> | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
+|**Exp 1-B** | <center> X </center> | <center> O </center> | <center> O </center> | <center> O </center> | <center> 0.8047 </center> | <center> 0.8095 </center> | <center> 0.9151 </center> |
+|**Exp 1-C** | <center> O </center> | <center> X </center> | <center> O </center> | <center> O </center> | <center> 0.7845 </center> | <center> 0.7830 </center> | <center> 0.9030 </center> |
+|**Exp 1-D** | <center> O </center> | <center> O </center> | <center> X </center> | <center> O </center> | <center> 0.7362 </center> | <center> 0.7440 </center> | <center> 0.8741 </center> |
+|**Exp 1-E** | <center> O </center> | <center> O </center> | <center> O </center> | <center> X </center> | <center> 0.7357 </center> | <center> 0.7497 </center> | <center> 0.8798 </center> |
 
 
 > Experiment 2. Evaluating the Contribution of Using Both EEG and fNIRS Signals in Alzheimer’s Classification
 
-| <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
-|:--------:|--------:|--------:|--------:| 
-|**Exp 2-A** | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
-|**Exp 2-B** | <center> 0.7079 </center> | <center> 0.7002 </center> | <center> 0.8847 </center> |
-|**Exp 2-C** | <center> 0.6345 </center> | <center> 0.6336 </center> | <center> 0.7349 </center> |
+| <center>  </center> | <center> EEG </center> | <center> fNIRS </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
+|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+|**Exp 2-A** | <center> O </center> | <center> O </center> | <center> 0.8126 </center> | <center> 0.8209 </center> | <center> 0.9149 </center> |
+|**Exp 2-B** | <center> O </center> | <center> X </center> | <center> 0.7079 </center> | <center> 0.7002 </center> | <center> 0.8847 </center> |
+|**Exp 2-C** | <center> X </center> | <center> O </center> | <center> 0.6345 </center> | <center> 0.6336 </center> | <center> 0.7349 </center> |
 
 
 > Experiment 3. Comparative Analysis with [Prior Research](https://www.sciencedirect.com/science/article/pii/S0165027020300406) Method
-
 
 | <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|--------:|--------:|--------:| 
