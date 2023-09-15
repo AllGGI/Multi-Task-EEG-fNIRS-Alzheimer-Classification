@@ -114,8 +114,6 @@ Sunghyeon Kim - hahala25@yonsei.ac.kr
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [Signal Processing toolkit (spkit)](https://github.com/Nikeshbajaj/spkit/tree/master)
 
 
