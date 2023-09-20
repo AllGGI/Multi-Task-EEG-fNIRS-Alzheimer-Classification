@@ -52,7 +52,8 @@ Through our proposed event-specific feature extraction method, we extracted dist
    ```
 3. **Run**
    ```
-   python main.py --gpu [GPU ID to use]
+   python main.py --data_root [Dataset Root (Root of 2nd+3rd+4th sorted data folders)]
+                  --gpu [GPU ID to use]
                   --mode [segmentation | extraction | selection | classification(default)]
                   --exp [1(default) - Tasks | 2 - Modals | 3 - Previous study]
                   --task [R(Resting) | C(Oddball) | N(1-back) | V(Verbal fluency)]
