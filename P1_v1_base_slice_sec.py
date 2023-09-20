@@ -11,9 +11,10 @@ from glob import glob
 from tqdm import tqdm
 import pickle
 
+global_slice_sec = 10
+
 eeg_sampling_rate = 500
 fnirs_sampling_rate = 8
-global_slice_sec = 10
 # targ_idx_choice_num = 5 # num to choice targ_idx
 
 # No trigger file: [AD s107, NORMAL s097, NORMAL s099, NORMAL s100]
@@ -303,17 +304,16 @@ def trigger_named_trigger(act_name, trig_file, eeg_mat, fnirs_mat):
 
     
 
-def make_sliced_data_pkl(pths, root_path, trig_list):
+def make_sliced_data_pkl(levels, root_path, trig_list):
     # make pickle of all data
     data_list = [{},{},{},{}] # ad, cn, ns, pre order
 
-    for i, path in enumerate(pths):
+    for i, path in enumerate(levels):
         patient_list = glob(os.path.join(root_path, path, '*'))
         data_list[i]['EEG'] = [sorted(glob(os.path.join(x, 'EEG/*.mat'))) for x in patient_list]
         data_list[i]['fNIRs'] = [sorted(glob(os.path.join(x, 'fNIRs/p_*.mat'))) for x in patient_list]
 
     data = [{},{},{},{}] # ad, cn, ns, pre order
-    levels = ['AD', 'NORMAL', 'NP', 'MCI']
     act_save_order = {'RO':0, 'C1':1, 'C2':2, 'N1':3, 'N2':4, 'V':5}
     eeg_fnirs_act_matching = {'RO':'p_01_resting', 'C1':'p_02_oddball1', 'C2':'p_03_oddball2', 'N1':'p_04_nback1', 'N2':'p_05_nback2', 'V':'p_06_verbal'}
 
@@ -457,79 +457,51 @@ def make_sliced_data_pkl(pths, root_path, trig_list):
 
 
 
-def segmentation_slice_base(): # if __name__ == "__main__":
+def segmentation_slice_base(dataset_root_path): # if __name__ == "__main__":
     
     # make data list
-    eeg_path = "D:\치매감지\EEG_fNIRs_dataset\Sorted_Dataset\Sorted_alzh_dataset/".replace('\\', '/')
+    eeg_path = (dataset_root_path + "Sorted_alzh_dataset/").replace('\\', '/')
     eeg_levels = ['AD', 'NORMAL', 'NP', 'MCI']
     # print(eeg_path)
 
-    trig_3rd_pth = 'D:\치매감지\EEG_fNIRs_dataset\Alzh_dataset_3rd_year/alzh_EEG_fNIRS\data/'.replace('\\', '/')
-    trig_3rd_levels = ['alzh', 'normal', 'N(p)', 'MCI']
-    # print(trig_3rd_pth)
+    trig_pth = (dataset_root_path + 'Sorted_alzh_dataset/').replace('\\', '/')
+    trig_levels = ['AD', 'NORMAL', 'NP', 'MCI']
 
-    trig_2nd_pth = 'D:\치매감지\EEG_fNIRs_dataset\Alzh_dataset_3rd_year/alzh_2nd_year\치매감지\치매감지데이터/'.replace('\\', '/')
-    trig_2nd_levels = ['ad', 'cn', 'ns', 'pre']
 
-    # make pickle of all data
-    eeg_data_list = {'AD':[], 'NORMAL':[], 'NP':[], 'MCI':[]} # ad, cn, ns, pre order
+    # # make pickle of all data
+    # eeg_data_list = {'AD':[], 'NORMAL':[], 'NP':[], 'MCI':[]} # ad, cn, ns, pre order
 
-    for i, level in enumerate(eeg_levels):
-        patient_list = glob(os.path.join(eeg_path, level, '*'))
-        eeg_data_list[level] = [sorted(glob(os.path.join(x, 'EEG/*.mat'))) for x in patient_list]
-        # data_list[i]['fNIRs'] = [sorted(glob(os.path.join(x, 'fNIRs/p_*.mat'))) for x in patient_list]
-    # print(eeg_data_list['AD'])
+    # for i, level in enumerate(eeg_levels):
+    #     patient_list = glob(os.path.join(eeg_path, level, '*'))
+    #     eeg_data_list[level] = [sorted(glob(os.path.join(x, 'EEG/*.mat'))) for x in patient_list]
+    #     # data_list[i]['fNIRs'] = [sorted(glob(os.path.join(x, 'fNIRs/p_*.mat'))) for x in patient_list]
+    # # print(eeg_data_list['AD'])
 
-    trig_list2 = {'AD':[], 'NORMAL':[], 'NP':[], 'MCI':[]}
 
-    # 2nd first
-    for i, level in enumerate(trig_2nd_levels):
-        patient_list = glob(os.path.join(trig_2nd_pth, level, '*'))
+    # make trig list
+    trig_list = {'AD':[], 'NORMAL':[], 'NP':[], 'MCI':[]}
+    for i, level in enumerate(trig_levels):
+        patient_list = glob(os.path.join(trig_pth, level, '*'))
         for x in patient_list:
             fold_list = os.listdir(x)
             
             # Trigger names: 'Trigger' or 'matdata' or 'Event extraction'
             if 'Trigger' in fold_list:
                 file_list = glob(os.path.join(x, 'Trigger/*trig*.mat'))
-                trig_list2[eeg_levels[i]] += file_list
+                trig_list[eeg_levels[i]] += file_list
             elif 'matdata' in fold_list:
                 file_list = glob(os.path.join(x, 'matdata/*trig*.mat'))
-                trig_list2[eeg_levels[i]] += file_list
+                trig_list[eeg_levels[i]] += file_list
             elif 'Event extraction' in fold_list:
                 file_list = glob(os.path.join(x, 'Event extraction/*trig*.mat'))
-                trig_list2[eeg_levels[i]] += file_list
+                trig_list[eeg_levels[i]] += file_list
             else: raise
             
-        # print(len(trig_list2[eeg_levels[i]])) # 10, 20, 10, 10 -> finished!
+        # print(len(trig_list[eeg_levels[i]])) # 26, 67, 48, 48 -> finished!
     
-    # print('*' * 100)
 
-    # Add 3rd
-    trig_list3 = {'AD':[], 'NORMAL':[], 'NP':[], 'MCI':[]}
-    for i, level in enumerate(trig_3rd_levels):
-        patient_list = glob(os.path.join(trig_3rd_pth, level, '*'))
-        for x in patient_list:
-            fold_list = os.listdir(x)
-
-            # Trigger names: 'matdata'
-            if 'matdata' in fold_list:
-                file_list = glob(os.path.join(x, 'matdata/*trig*.mat'))
-                trig_list3[eeg_levels[i]] += file_list
-
-            else:
-                print(level, x, fold_list) # normal 97, 99, 100
-            
-        # print(len(trig_list3[eeg_levels[i]])) # 20, 50, 40, 39
 
     # print('*' * 100)
- 
-    # Concat 2nd + 3rd trig list
-    trig_list = dict()
-    trig_list['AD'] = trig_list2['AD'] + trig_list3['AD']
-    trig_list['NORMAL'] = trig_list2['NORMAL'] + trig_list3['NORMAL']
-    trig_list['NP'] = trig_list2['NP'] + trig_list3['NP']
-    trig_list['MCI'] = trig_list2['MCI'] + trig_list3['MCI']
-
     print('>> AD patients num:', len(trig_list['AD'])) # 30
     print('>> Normal patients num:', len(trig_list['NORMAL'])) # 67 (70 - (patient 97, 99, 100))
     print('>> NP patients num:', len(trig_list['NP'])) # 50

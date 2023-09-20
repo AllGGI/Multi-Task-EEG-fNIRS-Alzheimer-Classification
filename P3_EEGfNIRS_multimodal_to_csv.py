@@ -101,7 +101,7 @@ def multimodal2csv():
     # 3: EEG PSD + fnirs time
     # 4: fnirs PSD + fnirs time
     # 5: EEG PSD
-    for option in range(1,6):
+    for option in range(1,4):
         print('\n>> Current option:', option)
         if option == 1: # EEG + fNIRS
             complex_df = pd.concat([needed_X_eeg_psd, needed_X_fnirs_psd, needed_X_fnirs_timedomain], axis=1)

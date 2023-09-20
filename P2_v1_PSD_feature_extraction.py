@@ -27,7 +27,7 @@ def EEG_RhythmicDecomposition_sliced(levels, alllevel_eeg_data, slice_sec):
     ###################################################################################
     eeg_sampling_rate = 500
     eeg_channels = 32
-    eeg_bands = [[1,4],[4,8],[8,14],[14,30],[30,40],[40,50]] # [[4],[4,7],[8,10],[10,13],[14,25],[26,40]]
+    eeg_bands = [[4],[4,8],[8,14],[14,30],[30,40],[40,50]] # [[4],[4,7],[8,10],[10,13],[14,25],[26,40]]
 
     for i, level_data in enumerate(alllevel_eeg_data): # ad 26 -> norm 64 -> mci 46
         patients = []
@@ -256,90 +256,90 @@ def FNIRS_RhythmicDecomposition_sliced(levels, alllevel_fnirs_data, slice_sec):
 
 
 
-# def EEG_RhythmicDecomposition_full(levels, alllevel_eeg_data):
-#     '''
-#         Decompose EEG Signal(s)-all the channels in Rhythms and compute power in each band for each channel
-#         --------------------------------------------------------------------------------------------------
-#         # Delta, Theta, Alpha, Beta, Gamma1, Gamma2
-#         default band = [[4],[4,8],[8,14],[14,30],[30,47],[47]]
+def EEG_RhythmicDecomposition_full(levels, alllevel_eeg_data):
+    '''
+        Decompose EEG Signal(s)-all the channels in Rhythms and compute power in each band for each channel
+        --------------------------------------------------------------------------------------------------
+        # Delta, Theta, Alpha, Beta, Gamma1, Gamma2
+        default band = [[4],[4,8],[8,14],[14,30],[30,47],[47]]
 
-#         input
-#         E: EEG segment of shape (n,nch)
-#         fs: sampling rate
-#         fBands: list of frequency bands - if None: fBands =[[4],[4,8],[8,14],[14,30],[30,47],[47]]
+        input
+        E: EEG segment of shape (n,nch)
+        fs: sampling rate
+        fBands: list of frequency bands - if None: fBands =[[4],[4,8],[8,14],[14,30],[30,47],[47]]
 
-#         output
-#         Px: sum of the power in a band  -  shape (number of bands,nch)
-#         Pm: mean power in a band       -  shape (number of bands,nch)
-#         Pd: standard deviation of power in a band  -  shape (number of bands,nch)
-#     '''
+        output
+        Px: sum of the power in a band  -  shape (number of bands,nch)
+        Pm: mean power in a band       -  shape (number of bands,nch)
+        Pd: standard deviation of power in a band  -  shape (number of bands,nch)
+    '''
     
-#     ###################################################################################
-#     eeg_sampling_rate = 500
-#     eeg_channels = 32
-#     eeg_bands = [[1,4],[4,8],[8,14],[14,30],[30,40],[40,50]] # [[4],[4,7],[8,10],[10,13],[14,25],[26,40]]
+    ###################################################################################
+    eeg_sampling_rate = 500
+    eeg_channels = 32
+    eeg_bands = [[4],[4,8],[8,14],[14,30],[30,40],[40,50]] # [[4],[4,7],[8,10],[10,13],[14,25],[26,40]]
 
-#     for i, level_data in enumerate(alllevel_eeg_data): # ad 26 -> norm 64 -> mci 46
-#         patients = []
-#         for patient in level_data: # 26
-#             act_out = [[] for i in range(6)]
-#             for act_num, act_data in enumerate(patient): # 6 = RO, C1, C2, N1, N2, V
-#                 if act_num == 0: # RO (30000=[0,30 sec], 32)
-#                     data = act_data[:eeg_sampling_rate*60, :] # RO - 60 sec (30000,32)
-#                     # print(data.shape) # (30000, 32)
-#                     n_seg = 512
-#                     n_overlap = 256
-#                     Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fBands=eeg_bands, fs=eeg_sampling_rate, nperseg=n_seg, noverlap=n_overlap, Sum=True, Mean=True, SD=True)
-#                     # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
-#                     powers = np.stack([Px,Pm,Pd], axis=0)
-#                     # print(powers.shape)
+    for i, level_data in enumerate(alllevel_eeg_data): # ad 26 -> norm 64 -> mci 46
+        patients = []
+        for patient in level_data: # 26
+            act_out = [[] for i in range(6)]
+            for act_num, act_data in enumerate(patient): # 6 = RO, C1, C2, N1, N2, V
+                if act_num == 0: # RO (30000=[0,30 sec], 32)
+                    data = act_data[:eeg_sampling_rate*60, :] # RO - 60 sec (30000,32)
+                    # print(data.shape) # (30000, 32)
+                    n_seg = 512
+                    n_overlap = 256
+                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fBands=eeg_bands, fs=eeg_sampling_rate, nperseg=n_seg, noverlap=n_overlap, Sum=True, Mean=True, SD=True)
+                    # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
+                    powers = np.stack([Px,Pm,Pd], axis=0)
+                    # print(powers.shape)
                     
-#                     act_out[act_num] = powers # (3,6,32)
+                    act_out[act_num] = powers # (3,6,32)
 
-#                 elif act_num == 1 or act_num == 2 or act_num == 3 or act_num == 4: # C, N (100000, 32)
-#                     n_seg = 256
-#                     n_overlap = 128
+                elif act_num == 1 or act_num == 2 or act_num == 3 or act_num == 4: # C, N (100000, 32)
+                    n_seg = 256
+                    n_overlap = 128
 
-#                     data = act_data # (100000, 32)
-#                     Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fBands=eeg_bands, fs=eeg_sampling_rate, nperseg=n_seg, noverlap=n_overlap, Sum=True, Mean=True, SD=True)
-#                     powers = np.stack([Px,Pm,Pd], axis=0)
+                    data = act_data # (100000, 32)
+                    Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data, fBands=eeg_bands, fs=eeg_sampling_rate, nperseg=n_seg, noverlap=n_overlap, Sum=True, Mean=True, SD=True)
+                    powers = np.stack([Px,Pm,Pd], axis=0)
 
-#                     act_out[act_num] = powers # (3,6,32)
+                    act_out[act_num] = powers # (3,6,32)
 
-#                 elif act_num == 5: # Verbal (15000=[0,30 sec], 32)
+                elif act_num == 5: # Verbal (15000=[0,30 sec], 32)
 
-#                     data_list = act_data
-#                     act_out_1_sample_Px, act_out_1_sample_Pm, act_out_1_sample_Pd = [], [], []
+                    data_list = act_data
+                    act_out_1_sample_Px, act_out_1_sample_Pm, act_out_1_sample_Pd = [], [], []
 
-#                     n_seg = 512
-#                     n_overlap = 256
-#                     for data_sample in data_list: # 30 sec (15000, 32) * 6 segs
-#                         # print(data_sample.shape) # (15000, 32)
+                    n_seg = 512
+                    n_overlap = 256
+                    for data_sample in data_list: # 30 sec (15000, 32) * 6 segs
+                        # print(data_sample.shape) # (15000, 32)
                         
-#                         Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data_sample, fBands=eeg_bands, fs=eeg_sampling_rate, nperseg=n_seg, noverlap=n_overlap, Sum=True, Mean=True, SD=True)
-#                         # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
+                        Px,Pm,Pd = sp.eeg.eeg_processing.RhythmicDecomposition(E=data_sample, fBands=eeg_bands, fs=eeg_sampling_rate, nperseg=n_seg, noverlap=n_overlap, Sum=True, Mean=True, SD=True)
+                        # print(Px.shape, Pm.shape, Pd.shape) # (6 band, 32 ch) each
 
-#                         powers = np.stack([Px,Pm,Pd], axis=0)
-#                         # print(powers.shape)
-#                         act_out_1_sample_Px.append(Px) # (6,32)
-#                         act_out_1_sample_Pm.append(Pm) # (6,32)
-#                         act_out_1_sample_Pd.append(Pd) # (6,32)
+                        powers = np.stack([Px,Pm,Pd], axis=0)
+                        # print(powers.shape)
+                        act_out_1_sample_Px.append(Px) # (6,32)
+                        act_out_1_sample_Pm.append(Pm) # (6,32)
+                        act_out_1_sample_Pd.append(Pd) # (6,32)
 
-#                     act_out_Px = np.mean(np.stack(act_out_1_sample_Px, axis=0), axis=0) # (6,32)
-#                     act_out_Pm = np.mean(np.stack(act_out_1_sample_Pm, axis=0), axis=0)
-#                     act_out_Pd = np.mean(np.stack(act_out_1_sample_Pd, axis=0), axis=0)
-#                     this_act_out = np.stack([act_out_Px, act_out_Pm, act_out_Pd], axis=0) # (3,6,32)
+                    act_out_Px = np.mean(np.stack(act_out_1_sample_Px, axis=0), axis=0) # (6,32)
+                    act_out_Pm = np.mean(np.stack(act_out_1_sample_Pm, axis=0), axis=0)
+                    act_out_Pd = np.mean(np.stack(act_out_1_sample_Pd, axis=0), axis=0)
+                    this_act_out = np.stack([act_out_Px, act_out_Pm, act_out_Pd], axis=0) # (3,6,32)
 
-#                     act_out[act_num] = this_act_out # (3,6,32)
+                    act_out[act_num] = this_act_out # (3,6,32)
 
-#             patients.append(act_out)
+            patients.append(act_out)
         
-#         patients = np.asarray(patients)
-#         print(patients.shape) # (26, 6, 3, 6, 32)
+        patients = np.asarray(patients)
+        print(patients.shape) # (26, 6, 3, 6, 32)
 
-#         np.save('./inputs/full/' + levels[i] + '_eeg_power_SMSD.npy', patients)
-#         print('>> npy saved.')
-#     ###################################################################################
+        np.save('./inputs/full/' + levels[i] + '_eeg_power_SMSD.npy', patients)
+        print('>> npy saved.')
+    ###################################################################################
     
 
 def FNIRS_RhythmicDecomposition_full(levels, alllevel_fnirs_data):
@@ -462,7 +462,7 @@ def FNIRS_RhythmicDecomposition_full(levels, alllevel_fnirs_data):
 
 def psd_feature_extraction():
 
-    slice_sec_num = 5
+    slice_sec_num = 10
 
     ###################################################################################
     # Sliced
@@ -498,7 +498,7 @@ def psd_feature_extraction():
     print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
     all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
 
-    EEG_RhythmicDecomposition_sliced(levels, all_levels_eeg, slice_sec=slice_sec_num)
+    # EEG_RhythmicDecomposition_sliced(levels, all_levels_eeg, slice_sec=slice_sec_num)
     # FNIRS_RhythmicDecomposition_sliced(levels, all_levels_fnirs, slice_sec=slice_sec_num)
 
     ###################################################################################
@@ -534,7 +534,6 @@ def psd_feature_extraction():
     print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
     all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
 
-
-    # EEG_RhythmicDecomposition_full(levels, all_levels_eeg)
-    FNIRS_RhythmicDecomposition_full(levels, all_levels_fnirs)
+    EEG_RhythmicDecomposition_full(levels, all_levels_eeg)
+    # FNIRS_RhythmicDecomposition_full(levels, all_levels_fnirs)
 

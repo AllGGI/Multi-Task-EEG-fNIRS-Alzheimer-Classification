@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import os
 
+global_slice_sec = 10
+
 levels = ['AD', 'NORMAL', 'MCI']
 features = ['Px', 'Pm', 'Pd']
 fnirs_hb = ['Hb', 'HbO', 'THb']
@@ -136,6 +138,6 @@ def sliced2csv(eeg_cols, fnirs_cols, load_pth, save_csv_name):
 def psd2csv():
 
     eeg_cols, fnirs_cols = make_cols()
-    sliced2csv(eeg_cols, fnirs_cols, load_pth='./inputs/5-sec/', save_csv_name='Source1-5sec_eeg_fnirs_power_sliced')
+    sliced2csv(eeg_cols, fnirs_cols, load_pth='./inputs/' + str(global_slice_sec) + '-sec/', save_csv_name='Source1-' + str(global_slice_sec) + 'sec_eeg_fnirs_power_sliced')
     sliced2csv(eeg_cols, fnirs_cols, load_pth='./inputs/full/', save_csv_name='Source2-full_eeg_fnirs_psd')
 

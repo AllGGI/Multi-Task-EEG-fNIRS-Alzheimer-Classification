@@ -27,21 +27,27 @@ from P5_v3_comparison_of_selection_method import PrevStudy_feature_selection, Pr
 def main(args):
 
     # mode: [segmentation / extraction / selection / classification]
+
+    # RUN) python main.py --mode segmentation
     if args.mode == "segmentation":
         # make pickles from EEG/fNIRS .mat files
-        segmentation_slice_base()
-        segmentation_slice_extra()
-        segmentation_full_base()
-        segmentation_full_extra()
-        segmentation_timedomain_base()
-        segmentation_timedomain_extra()
+        segmentation_slice_base(args.data_root)
+        segmentation_slice_extra(args.data_root)
+        segmentation_full_base(args.data_root)
+        segmentation_full_extra(args.data_root)
+        segmentation_timedomain_base(args.data_root)
+        segmentation_timedomain_extra(args.data_root)
+        print('>> Segmentation finished.')
 
+
+    # RUN) python main.py --mode extraction
     elif args.mode == "extraction":
         psd_feature_extraction()
         psd2csv()
         timedomain2csv()
         multimodal2csv() # EEG + fNIRS csv
 
+    # RUN) python main.py --mode selection --exp 1 --task R 
     elif args.mode == "selection":
         task_dict = {'R': [0], 'C': [1,2], 'N': [3,4], 'V': [5]}
         csv_root = './csv_folder/Experiment' + str(args.exp) + '/'
@@ -65,6 +71,7 @@ def main(args):
             
             for pth in pths: rfecv_feature_selection(args.cv_num, act_num, pth, csv_root, save_root, args.seed)
 
+        
         elif args.exp == 3:
             act_num = [0,1,2,3,4,5]
 
@@ -78,7 +85,8 @@ def main(args):
             # Exp3-E: PrevEEG + PrevfNIRS + PCCFS
             PrevStudy_feature_selection(csv_root)
 
-        
+    
+    # RUN) python main.py --mode classification --exp 1 --task R
     elif args.mode == "classification":
         task_dict = {'R': [0], 'C': [1,2], 'N': [3,4], 'V': [5]}
         save_root = './Experimental_results/Experiment' + str(args.exp) + '/'
@@ -146,3 +154,4 @@ if __name__ == "__main__":
 
     # print(config)
     main(config)
+

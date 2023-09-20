@@ -1,9 +1,10 @@
 >> YOUR parameters for classification:
 
+data_root = E:\최종_치매감지백업\데이터셋\EEG_fNIRs_dataset\Sorted_Dataset_234/
 gpu = 0,1,2,3
 mode = classification
-exp = 2
-task = R,C,N,V
+exp = 1
+task = R
 seed = 1263
 cv_num = 5
 clf_type = Tree

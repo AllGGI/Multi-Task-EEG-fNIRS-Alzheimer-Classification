@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description="Base Training")
 
 
 # configs
+parser.add_argument("--data_root", default="E:\최종_치매감지백업\데이터셋\EEG_fNIRs_dataset\Sorted_Dataset_234/", type=str)
 parser.add_argument("--gpu", default="0,1,2,3", type=str, help="GPU id to use.")
 parser.add_argument(
     "--mode",
