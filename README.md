@@ -35,23 +35,23 @@ Through our proposed event-specific feature extraction method, we extracted dist
 
 > **TODO: Add requirements.txt**
 
-* spkit
+* **spkit**
   ```sh
   pip install spkit
   ```
 
 ### How to run
 
-1. Clone the repo
+1. **Clone the repo**
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-2. Install prerequisites
+2. **Install prerequisites**
    ```sh
    pip install -r requirements.txt
    ```
-3. Run main.py
-   ```sh
+3. **Run**
+   ```
    python main.py --gpu [GPU ID to use]
                   --mode [segmentation | extraction | selection | classification(default)]
                   --exp [1(default) - Tasks | 2 - Modals | 3 - Previous study]
@@ -61,6 +61,23 @@ Through our proposed event-specific feature extraction method, we extracted dist
                   --clf_type [Tree(default) | SVM | RF | MLP]
    ```
 
+      > **3-1. Segmentation Run Example**
+      ```sh
+      python main.py --mode segmentation
+      ```
+      > **3-2. Extraction Run Example**
+      ```sh
+      python main.py --mode extraction
+      ```
+      > **3-3. Selection Run Example**
+      ```sh
+      python main.py --mode selection --exp 1 --task R 
+      ```
+      > **3-4. Classification Run Example**
+      ```sh
+      python main.py --mode classification --exp 1 --task R
+      ```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -68,7 +85,7 @@ Through our proposed event-specific feature extraction method, we extracted dist
 <!-- EXPERIMENTAL RESULTS -->
 ## Experimental Results
 
-> Experiment 1. Evaluating the Contribution of Each Task in Alzheimer’s Classification
+> **Experiment 1. Evaluating the Contribution of Each Task in Alzheimer’s Classification**
 
 | <center>  </center> | <center> Resting </center> | <center> 1-back </center> | <center> Oddball </center> | <center> Verbal </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
@@ -79,7 +96,7 @@ Through our proposed event-specific feature extraction method, we extracted dist
 |**Exp 1-E** | <center> O </center> | <center> O </center> | <center> O </center> | <center> X </center> | <center> 0.7357 </center> | <center> 0.7497 </center> | <center> 0.8798 </center> |
 
 
-> Experiment 2. Evaluating the Contribution of Using Both EEG and fNIRS Signals in Alzheimer’s Classification
+> **Experiment 2. Evaluating the Contribution of Using Both EEG and fNIRS Signals in Alzheimer’s Classification**
 
 | <center>  </center> | <center> EEG </center> | <center> fNIRS </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
@@ -88,7 +105,7 @@ Through our proposed event-specific feature extraction method, we extracted dist
 |**Exp 2-C** | <center> X </center> | <center> O </center> | <center> 0.6345 </center> | <center> 0.6336 </center> | <center> 0.7349 </center> |
 
 
-> Experiment 3. Comparative Analysis with [Prior Research](https://www.sciencedirect.com/science/article/pii/S0165027020300406) Method
+> **Experiment 3. Comparative Analysis with [Prior Research](https://www.sciencedirect.com/science/article/pii/S0165027020300406) Method**
 
 | <center>  </center> | <center> Accuracy </center> | <center> F1 score </center> | <center> AUC score </center> |
 |:--------:|--------:|--------:|--------:| 
