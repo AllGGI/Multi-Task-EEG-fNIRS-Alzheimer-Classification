@@ -498,8 +498,9 @@ def psd_feature_extraction():
     print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
     all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
 
-    # EEG_RhythmicDecomposition_sliced(levels, all_levels_eeg, slice_sec=slice_sec_num)
-    # FNIRS_RhythmicDecomposition_sliced(levels, all_levels_fnirs, slice_sec=slice_sec_num)
+    # 1) generate EEG/fNIRS sliced input (Actually, EEG full + fNIRS sliced not used)
+    EEG_RhythmicDecomposition_sliced(levels, all_levels_eeg, slice_sec=slice_sec_num)
+    FNIRS_RhythmicDecomposition_sliced(levels, all_levels_fnirs, slice_sec=slice_sec_num)
 
     ###################################################################################
     # full
@@ -534,6 +535,7 @@ def psd_feature_extraction():
     print(len(ad_fnirs), len(norm_fnirs), len(mci_fnirs))
     all_levels_fnirs = [ad_fnirs, norm_fnirs, mci_fnirs]
 
+    # 2) generate EEG/fNIRS full input (Actually, EEG full + fNIRS sliced not used)
     EEG_RhythmicDecomposition_full(levels, all_levels_eeg)
-    # FNIRS_RhythmicDecomposition_full(levels, all_levels_fnirs)
+    FNIRS_RhythmicDecomposition_full(levels, all_levels_fnirs)
 
